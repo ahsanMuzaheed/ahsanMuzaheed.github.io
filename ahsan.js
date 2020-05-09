@@ -1,3 +1,6 @@
+ console.log('**********************************')
+
+
 var webRtcPlayerObj = null;
 function setupWebRtcPlayer111111111(htmlElement, config) {
 	webRtcPlayerObj = new webRtcPlayer({ peerConnectionOptions: null });
@@ -6,7 +9,7 @@ function setupWebRtcPlayer111111111(htmlElement, config) {
 	return webRtcPlayerObj.video;
 }
 
-
+ console.log('I was triggered during render')
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 var webRtcPlayerObj = null;
