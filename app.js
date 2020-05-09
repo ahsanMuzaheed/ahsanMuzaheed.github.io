@@ -72,7 +72,7 @@ function setupHtmlEvents() {
 		};
 	}
 
-  console.info('2222222222222222222 resizePlayerStyle:')
+  
 
 
 	qualityControlOwnershipCheckBox = document.getElementById('quality-control-ownership-tgl');
@@ -584,8 +584,7 @@ const ControlSchemeType = {
 var inputOptions = {
 	// The control scheme controls the behaviour of the mouse when it interacts
 	// with the WebRTC player.
-	//controlScheme: ControlSchemeType.LockedMouse,
-	controlScheme: ControlSchemeType.HoveringMouse,
+	controlScheme: ControlSchemeType.LockedMouse,
 
 	// Browser keys are those which are typically used by the browser UI. We
 	// usually want to suppress these to allow, for example, UE4 to show shader
@@ -1528,15 +1527,8 @@ function connect() {
 		alert('Your browser doesn\'t support WebSocket');
 		return;
 	}
-console.info('3333 connect:')
-	ws = new WebSocket(
-	//"ws://127.0.0.1:80/"
-	//"ws://18.156.190.199:3002/"
-	"ws://54.208.120.145:80/"
-	//window.location.href.replace('http://', 'ws://').replace('https://', 'wss://')
-	
-	
-	);
+
+	ws = new WebSocket(window.location.href.replace('http://', 'ws://').replace('https://', 'wss://'));
 
 	ws.onmessage = function (event) {
 		console.log(`<- SS: ${event.data}`);
