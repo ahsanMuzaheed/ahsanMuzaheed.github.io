@@ -1,17 +1,5 @@
- console.log('**********************************')
-
-
-var webRtcPlayerObj = null;
-function setupWebRtcPlayer111111111(htmlElement, config) {
-	webRtcPlayerObj = new webRtcPlayer({ peerConnectionOptions: null });
-	
-
-	return webRtcPlayerObj.video;
-}
-
- console.log('I was triggered during render')
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
-
+ console.log('**************ahsan.js  app.js********************')
 var webRtcPlayerObj = null;
 var print_stats = false;
 var print_inputs = false;
@@ -64,6 +52,10 @@ var editTextButton = undefined;
 // on-screen keyboard.
 var hiddenInput = undefined;
 
+
+ console.log('**********************************')
+ 
+ 
 var t0 = Date.now();
 function log(str) {
 	console.log(`${Math.floor(Date.now() - t0)}: ` + str);
@@ -212,13 +204,15 @@ function setOverlay(htmlClass, htmlElement, onClickFunction)
 	var videoPlayOverlay = document.getElementById('videoPlayOverlay');
 	if (!videoPlayOverlay) 
 	{
-		
+		 console.log('9999999999999 !!!!!!!!!setOverlay !videoPlayOverlay !!!!!!!!!!!!!!!!!!!!!!');
 		videoPlayOverlay = document.createElement('div');
 		videoPlayOverlay.id = 'videoPlayOverlay';
 		
 		var playerDiv = document.getElementById('root');
 		playerDiv.appendChild(videoPlayOverlay);
 	}
+	else
+		console.log(' !!!!!!!!!setOverlay videoPlayOverlay !!!!!!!!!!!!!!!!!!!!!!');
 
 	// Remove existing html child elements so we can add the new one
 	while (videoPlayOverlay.lastChild) 
@@ -335,11 +329,16 @@ function resetAfkWarningTimer() {
 }
 
 function createWebRtcOffer() {
-	if (webRtcPlayerObj) {
+	if (webRtcPlayerObj) 
+	{
 		console.log('Creating offer');
 		showTextOverlay('Starting connection to server, please wait');
 		webRtcPlayerObj.createOffer();
-	} else {
+		 console.log('!!!!!!!!!!22222222222!!!!!!!!!');
+	} 
+	else 
+	{
+		
 		console.log('WebRTC player not setup, cannot create offer');
 		showTextOverlay('Unable to setup video');
 	}
@@ -369,7 +368,8 @@ const ToClientMessageType = {
 	UnfreezeFrame: 4
 };
 
-function setupWebRtcPlayer(htmlElement, config) {
+function setupWebRtcPlayer(htmlElement, config) 
+{
 	webRtcPlayerObj = new webRtcPlayer({ peerConnectionOptions: config.peerConnectionOptions });
 	htmlElement.appendChild(webRtcPlayerObj.video);
 	htmlElement.appendChild(freezeFrameOverlay);
@@ -522,6 +522,7 @@ function setupWebRtcPlayer(htmlElement, config) {
 	if ('ontouchstart' in document.documentElement) {
 		createOnScreenKeyboardHelpers(htmlElement);
 	}
+
 
 	createWebRtcOffer();
 
@@ -746,7 +747,7 @@ function resizeFreezeFrameOverlay() {
 }
 
 function resizePlayerStyle(event) {
-	var playerElement = document.getElementById('player');
+	var playerElement = document.getElementById('root');
 
 	if (!playerElement)
 		return;
@@ -782,7 +783,7 @@ function updateVideoStreamSize() {
 
 	var now = new Date().getTime();
 	if (now - lastTimeResized > 1000) {
-		var playerElement = document.getElementById('player');
+		var playerElement = document.getElementById('root');
 		if (!playerElement)
 			return;
 
@@ -909,7 +910,7 @@ var normalizeAndQuantizeUnsigned = undefined;
 var normalizeAndQuantizeSigned = undefined;
 
 function setupNormalizeAndQuantize() {
-	let playerElement = document.getElementById('player');
+	let playerElement = document.getElementById('root');
 	let videoElement = playerElement.getElementsByTagName("video");
 
 	if (playerElement && videoElement.length > 0) {
@@ -1531,7 +1532,11 @@ function showConnectOverlay()
 }
 
 
-function start() {
+function start() 
+{
+	
+		 console.log('!!!!!!!!!!start!!!!!!!!!!!!!!!!!!!!!');
+		 
 	let statsDiv = document.getElementById("stats");
 	if (statsDiv) {
 		statsDiv.innerHTML = 'Not connected';
@@ -1548,6 +1553,7 @@ function start() {
 		setOverlay('clickableState', startText, event => 
 		{
 			connect();
+			
 			startAfkWarningTimer();
 		});
 		
@@ -1570,22 +1576,26 @@ function updateKickButton(playersCount) {
 		kickButton.value = `Kick (${playersCount})`;
 }
 
-function connect() {
+function connect() 
+{
 	"use strict";
-
+ console.log('!!!!!!!!!!666666666666666!!!!!!!!!');
 	window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-	if (!window.WebSocket) {
+	if (!window.WebSocket) 
+	{
 		alert('Your browser doesn\'t support WebSocket');
 		return;
 	}
 
 	ws = new WebSocket(window.location.href.replace('http://', 'ws://').replace('https://', 'wss://'));
 
-	ws.onmessage = function (event) {
+	ws.onmessage = function (event) 
+	{
 		console.log(`<- SS: ${event.data}`);
 		var msg = JSON.parse(event.data);
-		if (msg.type === 'config') {
+		if (msg.type === 'config') 
+		{
 			onConfig(msg);
 		} else if (msg.type === 'playerCount') {
 			updateKickButton(msg.count - 1);
@@ -1597,8 +1607,10 @@ function connect() {
 			console.log(`invalid SS message type: ${msg.type}`);
 		}
 	};
+	
 
-	ws.onerror = function (event) {
+	ws.onerror = function (event) 
+	{
 		console.log(`WS error: ${JSON.stringify(event)}`);
 	};
 
@@ -1608,7 +1620,7 @@ function connect() {
 		is_reconnection = true;
 
 		// destroy `webRtcPlayerObj` if any
-		let playerDiv = document.getElementById('player');
+		let playerDiv = document.getElementById('root');
 		if (webRtcPlayerObj) {
 			playerDiv.removeChild(webRtcPlayerObj.video);
 			webRtcPlayerObj.close();
@@ -1621,7 +1633,7 @@ function connect() {
 
 // Config data received from WebRTC sender via the Cirrus web server
 function onConfig(config) {
-	let playerDiv = document.getElementById('player');
+	let playerDiv = document.getElementById('root');
 	let playerElement = setupWebRtcPlayer(playerDiv, config);
 	resizePlayerStyle();
 
@@ -1640,6 +1652,9 @@ function onConfig(config) {
 }
 
 function load() {
+	
+	 console.log('!!!!!!!!!!111load!!!!!!!!!!!!!!!!!!!!!');
+
 	setupHtmlEvents();
 	setupFreezeFrameOverlay();
 	registerKeyboardEvents();
