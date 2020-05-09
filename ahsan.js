@@ -216,7 +216,7 @@ function setOverlay(htmlClass, htmlElement, onClickFunction)
 		videoPlayOverlay = document.createElement('div');
 		videoPlayOverlay.id = 'videoPlayOverlay';
 		
-		var playerDiv = document.getElementById('player');
+		var playerDiv = document.getElementById('root');
 		playerDiv.appendChild(videoPlayOverlay);
 	}
 
