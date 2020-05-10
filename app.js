@@ -1,5 +1,5 @@
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
-console.log('222222ahsanMuzaheed.github.io/app.js');
+console.log('333333ahsanMuzaheed.github.io/app.js');
 var webRtcPlayerObj = null;
 var print_stats = false;
 var print_inputs = false;
@@ -254,7 +254,7 @@ function showTextOverlay(text) {
 function showPlayOverlay() {
 	var img = document.createElement('img');
 	img.id = 'playButton';
-	img.src = '/images/Play.png';
+	img.src = 'https://ahsanmuzaheed.github.io/Play.png';
 	img.alt = 'Start Streaming';
 	setOverlay('clickableState', img, event => {
 		if (webRtcPlayerObj)
@@ -1601,4 +1601,4 @@ function load() {
 	registerKeyboardEvents();
 	start();
 }
-load();
+//load();
